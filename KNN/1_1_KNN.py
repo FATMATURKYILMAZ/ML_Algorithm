@@ -78,12 +78,12 @@ y[::5] += 1 * (0.5 - np.random.rand(8))
 T = np.linspace(0, 5, 500)[:, np.newaxis]
 
 # "uniform" ve "distance" ağırlık seçeneklerini dener
-for weight in ["uniform", "distance"]:
+for i,weight in enumerate(["uniform", "distance"]):  #i=0 iken wieght uniform olur,i=1iken distance olur
     knn = KNeighborsRegressor(n_neighbors=5, weights=weight)  # HATA BURADA DÜZELTİLDİ
     y_pred = knn.fit(X, y).predict(T)
     
     # Grafik çizimi
-    plt.figure()
+    plt.subplot(2,1,i+1)
     plt.scatter(X, y, color="green", label="data")
     plt.plot(T, y_pred, color="blue", label="prediction")
     plt.axis("tight")
